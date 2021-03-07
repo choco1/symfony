@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Webreathe{% endblock %}
+
+{% block body %}
+<body>
+
+<div class="banner-area ">
+    <div class="rCentered bg-white w-75 text-center pt-2 m-0">
+        <h1 class="p-0"><b>L'intelligence derrière vos technologies d'affaires..</b></h1>
+    </div>
+</div>
+
+
+
+
+    <!-- Posts -->
+
+    <div class="container mt-3 ">
+        <div class="row ">
+            <hr class="my-5 col-md-12">
+            <h2 class="text-center mb-4 col-md-12">Internet des objets</h2>
+            <div class="bg-secondary my-4 p-5">
+                <div class="text-white d-flex justify-content-center col-md-12">
+                    <p class="m-4">L'Internet des objets ou IdO est l'interconnexion entre l'Internet et des objets, des lieux et des environnements physiques. L'appellation désigne un nombre croissant d'objets connectés
+                        à l'Internet permettant ainsi une communication entre nos biens dits physiques et leurs existences numériques</p>
+                    <p class="m-4">Alias aliquid dignissimos distinctio dolores eius error, et facilis ipsa iste molestiae, nemo nihil omnis
+                        quas, sequi similique sint sit? A cupiditate dolore eum obcaecati quae quaerat sapiente unde velit!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ {#  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#}
+
+    <!------------------------->
+    <!--========Cards========-->
+    <div class="container-fluid main-cont ">
+        <div class="row news-row">
+            <div class="container-fluid col-md-12 col-sm-6 justify-content-center news-block">
+                <div class="card-group">
+                    {% for card in cards %}
+                        <div class="underlay">
+                            <div class="cards card">
+                                <div class="card-img-top" style="background-image: url('{{ card.image }}')"></div>
+                                <div class="card-block" >
+                                    <h5 class="card-title mx-3" style="font-family: 'Anton', sans-serif">{{ card.title }}<hr></h5>
+                                    <p class="card-text mx-3 mb-3" > {{ card.description}} <a href="#"><u>Read More...</u></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--========------------------------------------------------------------------------------------========-->
+
+
+    <div class="container">
+        <div class="row">
+            <hr class=" col-md-12 my-5">
+            <h2 class="text-center  col-md-12">Chez Webreathe, nous ne faisons jamais les choses à moitié.</h2>
+            <div class=" my-4 text-white d-flex justify-content-center bg-secondary  col-md-12">
+                <div class="m-5">
+                    {% for card in cards %}
+                        <div class="row ">
+                            <p class=" col-md-12">{{ card.description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <img class="w-50 m-3" src="https://i.pinimg.com/originals/8d/88/76/8d88768fff69567f131923aaf1bccb91.png" alt="">
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--========Carousel========-->
+
+    <div class="row">
+        <div class="container">
+            <hr class=" col-md-12 my-5 ">
+            <h2 class="text-center  col-md-12 mt-2 mb-4">Nos partenaires ont confiance en NOUS</h2>
+            <div class="bg-secondary py-3">
+                <div class="text-white d-flex justify-content-center col-md-12">
+                    <p class="m-3">L'Internet des objets ou IdO est l'interconnexion entre l'Internet et des objets, des lieux et des environnements  un nombre croissants</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper my-5">
+        <div class="carousel owl-carousel">
+            {% for carousel4 in carousels4 %}
+                <div class="homeP card card-1">
+                    <img class="w-75" src="{{ carousel4.logo }}" alt="First slide">
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+
+{#
+    <div class="container">
+        <div class="row">
+            <hr class=" col-md-12 my-5">
+            <h2 class="text-center  col-md-12">Nos partenaires ont confiance en NOUS</h2>
+            <div class="text-white d-flex justify-content-center col-md-12">
+                <p class="m-5">L'Internet des objets ou IdO est l'interconnexion entre l'Internet et des objets, des lieux et des environnements  un nombre croissants</p>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div id="carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            {% for carousel2 in carousels2 %}
+                            <div class="carousel-item {{ loop.first ? 'active':'' }}">
+
+                                    <div class="d-none d-lg-block">
+                                        <div class="slide-box">
+                                            <div class="row">
+
+                                                    <div class="col-md-3">
+                                                        <img class="w-100" src="{{ carousel2.logo }}" alt="First slide">
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                <div class="d-none d-md-block d-lg-none">
+                                    <div class="slide-box">
+                                        <div class="row">
+                                            {% for carousel3 in carousels3 %}
+                                                <div class="col-md-4">
+                                                  <img src="{{ carousel3.logo }}" alt="First slide">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="d-none d-sm-block d-md-none">
+                                    <div class="slide-box">
+                                        <div class="row">
+                                            {% for carousel2 in carousels2 %}
+                                                <div class="col-md-6">
+                                                    <img src="{{ carousel2.logo }}" alt="First slide">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="d-block d-sm-none">
+                                    {% for carousel1 in carousels1 %}
+                                         <img class="d-block w-100" src="{{ carousel1.logo }}" alt="First slide">
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    #}
+</body>
+
+
+
+{% endblock %}
+

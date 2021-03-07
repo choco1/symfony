@@ -1,0 +1,247 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Webreathe {% endblock %}
+
+{% block body %}
+    <body >
+        <div class="container">
+
+            {# ------------------------------------------Slide bare pour les filtre--------------------------------------- #}
+            <div class="row  d-flex justify-content-around mt-4 ">
+                <div class=" barre-modules bg-white col-md-12 mt-3 mx-5">
+                    <h2 class="text-center my-4 col-md-12">Tous les Modules</h2>
+                </div>
+            </div>
+                <section class="col-md-12 ">
+                   <ul class=" col-md-12 sm-12 text-center mb-3 d-flex justify-content-around">
+
+                       <div class="all-button">
+                           <div class="allModules">
+                                <li class="list active" data-filter="allModules">Tous les Modules</li>
+                           </div>
+
+
+                               <div class="dropdown">
+                                   <li class=" list dropdown-toggle"   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       Type de Module
+                                   </li>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                       {% for type in types %}
+                                            <a class="dropdown-item" data-filter="b" href="{{ path('list_module', {'id': type.id}) }}">{{ type.type }}</a>
+                                       {% endfor %}
+                                   </div>
+                               </div>
+
+
+                               <div class="dropdown">
+                                   <li class="list dropdown-toggle" data-filter="c"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       Type de capteur
+                                   </li>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                       {% for sensor in sensors %}
+                                            <a class="dropdown-item" href="{{ path('list_module', {'id': sensor.id}) }}">{{ sensor.nameSensor }}</a>
+                                       {% endfor %}
+                                   </div>
+                               </div>
+
+
+                               <div class="dropdown">
+                                   <li class="list dropdown-toggle" data-filter="d" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       Mode de connexion
+                                   </li>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                       {% for connexion in connexions %}
+                                            <a class="dropdown-item" value="{{ connexion.id }}" href="{{ path('list_module', {'id': connexion.id}) }}">{{ connexion.typeConnex}}</a>
+                                       {% endfor %}
+                                   </div>
+                               </div>
+
+
+                               <div class="dropdown">
+                                   <li class="list dropdown-toggle" data-filter="e" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       Type de batterie
+                                   </li>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                       {% for power in powers %}
+                                           <a class="dropdown-item" href="{{ path('list_module', {'id': power.id}) }}">{{ power.typeOfPower}}</a>
+                                       {% endfor %}
+                                   </div>
+                               </div>
+                       </div>
+                   </ul>
+
+                   <div class="modules col-md-12 ">
+                       <div class="itemBox allModules">
+                           <div class="d-block">
+                               <div class=" col-md-12 mb-4 p-0">
+                                   <div class="container p-0 ">
+                                       <div class="  container my-4">
+                                           <div class="row ">
+
+                                               {% for module in modules %}
+                                                   <div class="col-md-4 col-sm-6 my-2">
+                                                       <div class="cardModules card card-block ">
+                                                           <div class="d-flex justify-content-between">
+                                                               {% if module.functionState == 1 %}
+                                                                 <div><i class="fas fa-check-circle m-2 text-success"></i><span class="text-success"> <small>Functional</small></span></div>
+                                                                   <h4 class="prix card-title  text-right m-2 ">{{ module.price }}<i class="far fa-usd-circle"></i></h4>
+                                                               {% else%}
+                                                                   <div class="warning my-1">
+                                                                       <i class="fas fa-exclamation-circle m-2 text-warning"></i><span class=" mx-2 span text-warning">disfonctionnement d'une variabe de ce Module</span>
+                                                                        <a href="{{ path ('module_ko') }}"><i class="mx-4 fas fa-arrow-right text-warning text-right"></i></a>
+                                                                   </div>
+                                                               {% endif %}
+                                                           </div>
+                                                           <div class="mx-2">
+                                                               <a href="{{ path('single_module', {'id': module.id}) }}">
+                                                                 <img class="img " src="{{ asset('uploads/' ~ module.image) }}" alt="Photo of sunset">
+                                                               </a>
+                                                           </div>
+                                                           <div class="p-2 ">
+                                                               {% if module.functionState == 0 %}
+                                                                 <h5 class="card-title my-2 text-center" ><a href="{{ path('single_module', {'id': module.id}) }}">{{module.name}}</a></h5>
+                                                                   <div class="d-flex justify-content-center">
+                                                                        <a href="{{path('etat_fonction', {id: module.id})}}" class="my-2 w-50 btn btn-success rounded text-white ">fix the problem!  <i class="fas fa-tools text-white"></i></a>
+                                                                   </div>
+                                                               {% else %}
+                                                                   <h5 class="card-title my-1 text-center" ><a href="{{ path('single_module', {'id': module.id}) }}">{{module.name}}</a></h5>
+                                                               {% endif %}
+                                                           </div>
+                                                           <div class="etat-connex  d-flex justify-content-center mb-2">
+                                                               {% if module.functionState == 1 and  module.etatConnex == 1 %}
+                                                                   <a href="{{ path('etat_connex', {'id': module.id}) }}" class="connected btn btn-white "><span class="text-success"><small>Module Connected</small></span><i class="fas fa-bell mx-2 text-success"></i></a>
+                                                                   <a href="{{ path('etat_connex', {'id': module.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-muted"></i><span class="text-white"><small>Disconnected</small></span></a>
+                                                               {% elseif  module.functionState == 1 and  module.etatConnex == 0  %}
+                                                                   <a href="{{ path('etat_connex', {'id': module.id}) }}" class="connected btn btn-white"><i class="fas fa-bell mx-2 text-muted"></i><span class="text-white"><small>Connected</small></span></a>
+                                                                   <a href="{{ path('etat_connex', {'id': module.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-danger"></i><span class="text-danger"><small>Module  Disconnected</small></span></a>
+                                                                   <a href="{{ path('etat_fonction', {'id': module.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-warning"></i><span class="text-warning"><small>Soumettre Erreur</small></span></a>
+                                                               {% endif %}
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               {% endfor %}
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="itemBox b">
+
+                           <div class=" col-md-12 mb-4 p-0">
+                               <div class="container p-0 ">
+                                   <div class="  container my-4">
+                                       <div class="row ">
+
+                                           {% for moduleType in modulesType %}
+                                               <div class="col-md-4 col-sm-6 my-2">
+                                                   <div class="cardModules card card-block ">
+                                                       <h4 class="prix card-title  text-right m-2">{{ moduleType.price }}<i class="far fa-usd-circle"></i></h4>
+                                                       <div class="mx-2">
+                                                           <a href="{{ path('single_module', {'id': moduleType.id}) }}">
+                                                               <img class="img " src="{{ asset('uploads/' ~ moduleType.image) }}" alt="Photo of sunset">
+                                                           </a>
+                                                       </div>
+                                                       <div class="p-2">
+                                                           <h5 class="card-title mt-3 mb-3"><a href="{{ path('single_module', {'id': moduleType.id}) }}">{{moduleType.name}}</a></h5>
+
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           {% endfor %}
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+
+                       </div>
+                       <div class="itemBox c">
+
+                           <div class=" col-md-12 mb-4 p-0">
+                               <div class="container p-0 ">
+                                   <div class="  container my-4">
+                                       <div class="row ">
+
+                                           {% for moduleSensor in modulesSensor %}
+                                               <div class="col-md-4 col-sm-6 my-2">
+                                                   <div class="cardModules card card-block ">
+                                                       <h4 class="prix card-title  text-right m-2">{{ moduleSensor.price }}<i class="far fa-usd-circle"></i></h4>
+                                                       <div class="mx-2">
+                                                           <a href="{{ path('single_module', {'id': moduleSensor.id}) }}">
+                                                               <img class="img " src="{{ asset('uploads/' ~ moduleSensor.image) }}" alt="Photo of sunset">
+                                                           </a>
+                                                       </div>
+                                                       <div class="p-2">
+                                                           <h5 class="card-title mt-3 mb-3"><a href="{{ path('single_module', {'id': moduleSensor.id}) }}">{{moduleSensor.name}}</a></h5>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           {% endfor %}
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="itemBox d">
+
+                           <div class=" col-md-12 mb-4 p-0">
+                               <div class="container p-0 ">
+                                   <div class="  container my-4">
+                                       <div class="row ">
+
+                                           {% for moduleConex in modulesConex %}
+                                               <div class="col-md-4 col-sm-6 my-2">
+                                                   <div class="cardModules card card-block ">
+                                                       <h4 class="prix card-title  text-right m-2">{{ moduleConex.price }}<i class="far fa-usd-circle"></i></h4>
+                                                       <div class="mx-2">
+                                                           <a href="{{ path('single_module', {'id': moduleConex.id}) }}">
+                                                               <img class="img " src="{{ asset('uploads/' ~ moduleConex.image) }}" alt="Photo of sunset">
+                                                           </a>
+                                                       </div>
+                                                       <div class="p-2">
+                                                           <h5 class="card-title mt-3 mb-3"><a href="{{ path('single_module', {'id': moduleConex.id}) }}">{{moduleConex.name}}</a></h5>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           {% endfor %}
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+
+                       </div>
+                       <div class="itemBox e">
+
+                           <div class=" col-md-12 mb-4 p-0">
+                               <div class="container p-0 ">
+                                   <div class="  container my-4">
+                                       <div class="row ">
+
+                                           {% for modulePower in modulesPower %}
+                                               <div class="col-md-4 col-sm-6 my-2">
+                                                   <div class="cardModules card card-block ">
+                                                       <h4 class="prix card-title  text-right m-2">{{ modulePower.price }}<i class="far fa-usd-circle"></i></h4>
+                                                       <div class="mx-2">
+                                                           <a href="{{ path('single_module', {'id': modulePower.id}) }}">
+                                                               <img class="img " src="{{ asset('uploads/' ~ modulePower.image) }}" alt="Photo of sunset">
+                                                           </a>
+                                                       </div>
+                                                       <div class="p-2">
+                                                           <h5 class="card-title mt-3 mb-3"><a href="{{ path('single_module', {'id': modulePower.id}) }}">{{modulePower.name}}</a></h5>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           {% endfor %}
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
+                </section>
+
+                    {# ------------------------------------------Listes tout les modules --------------------------------------- #}
+        </div>
+    </body>
+{% endblock %}

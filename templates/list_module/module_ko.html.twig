@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Webreathe{% endblock %}
+
+{% block body %}
+
+    <body>
+
+        <div class="container">
+
+
+            <div class="row  d-flex justify-content-around mt-4 ">
+                <div class=" barre-modules bg-white col-md-12 mt-3 mx-5">
+                    <h2 class="text-center text-warning my-4 col-md-12">Tous les modules defected !!! </h2>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+
+                {% for moduleKo in modulesKo %}
+                    <div class="col-md-4 col-sm-6 my-2">
+                        <div class="cardModules card card-block ">
+                            <div class="warning">
+                                <i class="fas fa-exclamation-circle m-2 text-warning"></i><span class=" span text-warning">disfonctionnement d'une variabe de ce Module</span>
+                            </div>
+                            <div class="mx-2">
+                                <a href="{{ path('single_module', {'id': moduleKo.id}) }}">
+
+                                    <img class="img alert " src="{{ asset('uploads/warning.png') }}" alt="">
+
+                                    <img class="img " src="{{ asset('uploads/' ~ moduleKo.image) }}" alt="Photo of sunset">
+                                </a>
+                            </div>
+                            <div class="p-2">
+                                <h5 class="card-title mt-3 mb-3"><a href="{{ path('single_module', {'id': moduleKo.id}) }}">{{moduleKo.name}}</a></h5>
+                            </div>
+                            <div class="defected">
+                                <a href="{{path('etat_fonction', {id: moduleKo.id})}}" class="w-100 p-2 btn btn-success rounded text-white">fix the problem! <i class="fas fa-tools text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+
+        </div>
+    </body>
+
+{% endblock %}

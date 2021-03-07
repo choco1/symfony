@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Webreathe{% endblock %}
+
+{% block body %}
+
+    <div class="row ">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+                <div class="card-body bg-light">
+
+                    <div class="container">
+
+                        <div class=" text-center my-3 ">
+                            <h1>Creation d'un Module</h1>
+                        </div>
+
+                        {{ form_start(addModule) }}
+                        {{ form_widget(addModule) }}
+
+                        <button type="submit" class="btn btn-primary mr-4 mt-3 " formnovalidate>Ajoutez un nouveau Module</button>
+                        {{ form_end(addModule) }}
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
