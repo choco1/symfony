@@ -40,6 +40,17 @@
                             <div class="defected">
                                 <a href="{{path('etat_fonction', {id: moduleKo.id})}}" class="w-100 p-2 btn btn-success rounded text-white">fix the problem! <i class="fas fa-tools text-white"></i></a>
                             </div>
+                            <div class="card-footer">
+                                <button class="clic " data-filter="{{ moduleKo.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                <div class="toggle{{ moduleKo.id }}" >
+                                    <div class="d-none ">
+                                        <div class="d-flex justify-content-around">
+                                            <a href="{{ path('delete_module', {'id': moduleKo.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                            <a href="{{ path('edit_module', {'id': moduleKo.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

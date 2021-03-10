@@ -21,6 +21,17 @@
                                 <div class="photo mx-2">
                                     <img class="img " src="{{ asset('image/uploads/' ~ module.image) }}" alt="Photo module">
                                 </div>
+                                <div class="card-footer">
+                                    <button class="clic " data-filter="{{ module.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                    <div class="toggle{{ module.id }}" >
+                                        <div class="d-none ">
+                                            <div class="d-flex justify-content-around">
+                                                <a href="{{ path('delete_module', {'id': module.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                <a href="{{ path('edit_module', {'id': module.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -159,6 +170,7 @@
                                                                             <a href="{{path('etat_fonction', {id: singleModule.id})}}" class="w-100 p-2 btn btn-warning rounded text-white">fix the problem! <i class="fas fa-exclamation-circle text-white"></i></a>
                                                                         </div>
                                                                     {% endif %}
+
                                                                 </div>
                                                             </div>
                                                     {% endif %}

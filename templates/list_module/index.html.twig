@@ -144,10 +144,21 @@
                                                                    <a href="{{ path('etat_connex', {'id': module.id}) }}" class="connected btn btn-white "><span class="text-success"><small>Module Connected</small></span><i class="fas fa-bell mx-2 text-success"></i></a>
                                                                    <a href="{{ path('etat_connex', {'id': module.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-muted"></i><span class="text-white"><small>Disconnected</small></span></a>
                                                                {% elseif  module.functionState == 1 and  module.etatConnex == 0  %}
-                                                                   <a href="{{ path('etat_connex', {'id': module.id}) }}" class="connected btn btn-white"><i class="fas fa-bell mx-2 text-muted"></i><span class="text-white"><small>Connected</small></span></a>
+                                                                   <a href="{{ path('etat_connex', {'id': module.id}) }}" class="connected btn btn-white"><i class="fas fa-bell mx-2 text-muted "></i><span class="text-white"><small>Connected</small></span></a>
                                                                    <a href="{{ path('etat_connex', {'id': module.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-danger"></i><span class="text-danger"><small>Module  Disconnected</small></span></a>
                                                                    <a href="{{ path('etat_fonction', {'id': module.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-warning"></i><span class="text-warning"><small>Soumettre Erreur</small></span></a>
                                                                {% endif %}
+                                                           </div>
+                                                           <div class="card-footer">
+                                                               <button class="clic " data-filter="{{ module.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                                               <div class="toggle{{ module.id }}" >
+                                                                   <div class="d-none ">
+                                                                       <div class="d-flex justify-content-around">
+                                                                            <a href="{{ path('delete_module', {'id': module.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                                            <a href="{{ path('edit_module', {'id': module.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                                                       </div>
+                                                                   </div>
+                                                               </div>
                                                            </div>
                                                        </div>
                                                    </div>
@@ -196,6 +207,18 @@
                                                                    <a href="{{ path('etat_fonction', {'id': moduleType.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-warning"></i><span class="text-warning"><small>Soumettre Erreur</small></span></a>
                                                                {% endif %}
                                                            </div>
+
+                                                           <div class="card-footer">
+                                                               <button class="clic " data-filter="{{ moduleType.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                                               <div class="toggle{{ moduleType.id }}" >
+                                                                   <div class="d-none ">
+                                                                       <div class="d-flex justify-content-around">
+                                                                           <a href="{{ path('delete_module', {'id': moduleType.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                                           <a href="{{ path('edit_module', {'id': moduleType.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                                                       </div>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                {% endfor %}
@@ -234,6 +257,17 @@
                                                                <a href="{{ path('etat_fonction', {'id': moduleSensor.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-warning"></i><span class="text-warning"><small>Soumettre Erreur</small></span></a>
                                                            {% endif %}
                                                        </div>
+                                                       <div class="card-footer">
+                                                           <button class="clic " data-filter="{{ moduleSensor.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                                           <div class="toggle{{ moduleSensor.id }}" >
+                                                               <div class="d-none ">
+                                                                   <div class="d-flex justify-content-around">
+                                                                       <a href="{{ path('delete_module', {'id': moduleSensor.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                                       <a href="{{ path('edit_module', {'id': moduleSensor.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
+                                                       </div>
                                                    </div>
                                                </div>
                                            {% endfor %}
@@ -270,6 +304,17 @@
                                                                <a href="{{ path('etat_connex', {'id': moduleConex.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-danger"></i><span class="text-danger"><small>Module  Disconnected</small></span></a>
                                                                <a href="{{ path('etat_fonction', {'id': moduleConex.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-warning"></i><span class="text-warning"><small>Soumettre Erreur</small></span></a>
                                                            {% endif %}
+                                                       </div>
+                                                       <div class="card-footer">
+                                                           <button class="clic " data-filter="{{ moduleConex.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                                           <div class="toggle{{ moduleConex.id }}" >
+                                                               <div class="d-none ">
+                                                                   <div class="d-flex justify-content-around">
+                                                                       <a href="{{ path('delete_module', {'id': moduleConex.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                                       <a href="{{ path('edit_module', {'id': moduleConex.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                </div>
@@ -308,6 +353,17 @@
                                                                <a href="{{ path('etat_connex', {'id': modulePower.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-danger"></i><span class="text-danger"><small>Module  Disconnected</small></span></a>
                                                                <a href="{{ path('etat_fonction', {'id': modulePower.id}) }}" class="Disconnected btn btn-white"><i class="fas fa-bell mx-2 text-warning"></i><span class="text-warning"><small>Soumettre Erreur</small></span></a>
                                                            {% endif %}
+                                                       </div>
+                                                       <div class="card-footer">
+                                                           <button class="clic " data-filter="{{ modulePower.id }}" ><i class="fas fa-plus-circle text-primary text-white"></i></button>
+                                                           <div class="toggle{{ modulePower.id }}" >
+                                                               <div class="d-none ">
+                                                                   <div class="d-flex justify-content-around">
+                                                                       <a href="{{ path('delete_module', {'id': modulePower.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                                       <a href="{{ path('edit_module', {'id': modulePower.id}) }}" class="btn btn-success"><i class="fas fa-edit text-white"></i></a>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                </div>

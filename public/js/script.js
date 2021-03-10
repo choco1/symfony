@@ -217,6 +217,19 @@ $('.buttonAllModules').click(function(){
     }
 });
 
+/*-------------------------button delet et edite --------------------*/
+
+$('.clic').click(function(){
+    var value = $(this).attr('data-filter');
+
+    if($('.toggle'+value).find(".d-none").length){
+        $('.toggle'+value).find(".d-none").addClass("d-block").removeClass("d-none")
+    }
+    else if($('.toggle'+value).find(".d-block").length){
+        $('.toggle'+value).find(".d-block").addClass("d-none").removeClass("d-block")
+    }
+});
+
 /*----------------------------------------------------*/
 
 /*---------------input range --------------------*/

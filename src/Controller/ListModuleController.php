@@ -269,6 +269,7 @@ class ListModuleController extends AbstractController
     {
         $module = new Module();
         $form = $this->createForm(NewModuleType::class, $module);
+        // On faite le traitement du formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
@@ -295,6 +296,64 @@ class ListModuleController extends AbstractController
             'addModule' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/modules/delete/{id}", name="delete_module")
+     */
+    public function delete(Module $module){
+
+        // Pour supprimer avec Doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($module);
+        $entityManager->flush(); // DELETE FROM
+
+        $this->addFlash('danger', 'Votre Module a bien été supprimée');
+
+        return $this->redirectToRoute('list_module');
+    }
+
+
+    /**
+     * @return Response
+     * @Route("/modules/edit/{id}", name="edit_module")
+     */
+    public function edit(Request $request, Module $module){
+
+
+        $form = $this->createForm(NewModuleType::class, $module);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('image')->getData();
+
+            if($image) {
+
+                $allImage = ['default.jpg', 'fixtures/cam.jpg', 'fixtures/car.jpg', 'fixtures/four.jpg', 'fixtures/moto.jpg', 'fixtures/swatch.jpg', 'fixtures/tv.jpg', 'fixtures/iotcam.jpg', 'fixtures/iot1.png', 'fixtures/iot2.jpg', 'fixtures/gri.jpg', 'fixtures/vols.jpg', 'fixtures/iot4.jpg'];
+                if ($module->getImage() && !in_array($module->getImage(), $allImage)) {
+                    $fileSecond = new Filesystem();
+                    $fileSecond->remove($this->getParameter('upload_directory') . '/' . $module->getImage());
+                }
+
+                $file = uniqid().'.'.$image->guessExtension();
+                $image->move($this->getParameter('upload_directory'), $file);
+                $module->setImage($file);
+            }
+
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Votre Module a bien été modifiée');
+
+            return $this->redirectToRoute('list_module');
+        }
+
+        return $this->render('list_module/edit.html.twig', [
+            'editModule' => $form->createView(),
+            'modules' => $module,
+        ]);
+    }
+
+
 
 
     /**
