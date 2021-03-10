@@ -19,6 +19,9 @@ class ConsoBatterieRepository extends ServiceEntityRepository
         parent::__construct($registry, ConsoBatterie::class);
     }
 
+
+
+
     // /**
     //  * @return ConsoBatterie[] Returns an array of ConsoBatterie objects
     //  */

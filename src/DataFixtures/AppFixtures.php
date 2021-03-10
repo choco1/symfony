@@ -4,7 +4,9 @@ namespace App\DataFixtures;
 
 use App\Entity\Connection;
 use App\Entity\ConsoBatterie;
+use App\Entity\GestionCompteur;
 use App\Entity\HistoricFonctionModule;
+use App\Entity\HistoricTemperature;
 use App\Entity\HomePage;
 use App\Entity\Module;
 use App\Entity\Partner;
@@ -57,6 +59,7 @@ class AppFixtures extends Fixture
             $historicModule = new HistoricFonctionModule();
             $historicModule->setName($historic);
             $historicModule->setNumber($faker->numberBetween(1, 5));
+            $historicModule->setCommentaire($faker->text(14));
             $this->addReference('historic-'.$key, $historicModule);
 
             $manager->persist($historicModule);
@@ -72,6 +75,19 @@ class AppFixtures extends Fixture
             $manager->persist($type);
 
 
+        }
+
+
+        for($i = 0; $i <50;$i++){
+            $temp = new HistoricTemperature();
+            $temp->setTempMax($faker->numberBetween(15, 60));
+            $temp->setTempMin($faker->numberBetween(0, 60));
+            $temp->setDate($faker->dateTimeAd($max = 'now'));
+
+
+            $this->addReference('temp-'.$i, $temp);
+
+            $manager->persist($temp);
         }
 
 
@@ -118,6 +134,10 @@ class AppFixtures extends Fixture
             $manager->persist($modeConnex);
         }
 
+
+
+
+
         //'#23afe3', '#a7d212', '#ff4241', '#edc214', '#C173D7' ,'#73B4D7', '#5DC8C1', '#0E35B3'
 
         for ($i =0; $i < 30; $i++){
@@ -126,6 +146,7 @@ class AppFixtures extends Fixture
             $module->setName($faker->name);
             $module->setPrice($faker->numberBetween(300, 2000));
             $module->setDescription($faker->text(70));
+            //$module->addGestionCompteur()
             $module->setFunctionState($faker->boolean(70));
             $module->setEtatConnex($faker->boolean(0));
             $module->setNumberSerie($faker->unique()->numberBetween(100,200000000));
@@ -137,15 +158,21 @@ class AppFixtures extends Fixture
             for($n = 0; $n < 7; $n++){
                 $module->addSensor($this->getReference('sensor-'.rand(0, 6)));
             }
+
+            for($b = 0; $b < 20; $b++){
+                $module->addHistoricTemperature($this->getReference('temp-'.rand(0, 49)));
+            }
+
+
             for($j = 0; $j < 2; $j++){
                 $module->addConnection($this->getReference('connexion-'.rand(0, 7)));
             }
-            for($n =0; $n < 6; $n++){
-                $module->addHistoric($this->getReference('historic-'.rand(0, 3)));
+            for($n =0; $n < 10; $n++){
+                    $module->addHistoric($this->getReference('historic-' . rand(0, 3)));
             }
 
             $module->setImage($faker->randomElement([
-                 'image/cam.jpg', 'image/car.jpg', 'image/four.jpg', 'image/moto.jpg', 'image/swatch.jpg', 'image/tv.jpg', 'image/iotcam.jpg', 'image/iot1.png', 'image/iot2.jpg', 'image/gri.jpg', 'image/vols.jpg', 'image/iot4.jpg'
+                 'fixtures/cam.jpg', 'fixtures/car.jpg', 'fixtures/four.jpg', 'fixtures/moto.jpg', 'fixtures/swatch.jpg', 'fixtures/tv.jpg', 'fixtures/iotcam.jpg', 'fixtures/iot1.png', 'fixtures/iot2.jpg', 'fixtures/gri.jpg', 'fixtures/vols.jpg', 'fixtures/iot4.jpg'
             ]));
 
 

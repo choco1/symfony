@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 
+use App\Entity\ConsoBatterie;
 use App\Entity\HistoricFonctionModule;
 use App\Entity\Module;
 use App\Entity\TypeModule;
 use App\Form\NewModuleType;
 use App\Repository\ConnectionRepository;
+use App\Repository\ConsoBatterieRepository;
+use App\Repository\HistoricFonctionModuleRepository;
 use App\Repository\ModuleRepository;
 use App\Repository\PowerSupplyRepository;
 use App\Repository\SensorRepository;
@@ -103,10 +106,64 @@ class ListModuleController extends AbstractController
      * @Route("/module/{id}", name="single_module")
      */
 
-    public function singleModule($id, Module $module,ModuleRepository $moduleRepository ): Response {
+    public function singleModule($id, HistoricFonctionModuleRepository $fonctionModuleRepository, Module $module,ModuleRepository $moduleRepository, ConsoBatterieRepository $batterieRepository): Response {
+
+        $tableDate = [];
+        $date = [];
+        $etatTempMin= [];
+        $etatTempMax= [];
+        $nameEtat= [] ;
+        $valueEtat= [] ;
+        $modeConnex = [];
+        $connexName = [];
+        $connexColor = [];
+        $connexPercent = [];
+
+
+
+        $temperatures = $module->getHistoricTemperature();
+
+        foreach ($temperatures as $temperature){
+
+
+
+            $etatTempMax[] = $temperature->getTempMax();
+            $etatTempMin[] = $temperature->getTempMin();
+            $date[] =$temperature->getDate()->format('Y-m-d H:i:s');
+        }
+
+
+
+
+
+//        dump($etatTempMax);
+//
+//        dump($etatTempMax);
+//        dump($date);
+
+       $values = $module->getHistoric();
+
+       foreach ($values as $value){
+
+           $nameEtat[] = $value->getName();
+           $valueEtat[] = $value->getNumber();
+       }
+          // dump($nameEtat);
+            //dump($valueEtat);
 
 
         $moduleRepository = $this->getDoctrine()->getRepository(Module::class);
+
+        $list =$module->getConnection();
+
+
+        foreach ($list as $item){
+            $connexName[] = $item->getTypeConnex();
+            $batterie = $batterieRepository->findOneBy( [ 'nameConnex' => $item->getTypeConnex()]);
+            $modeConnex[] = $batterie;
+            $connexColor[] = $batterie->getCodeColor();
+            $connexPercent[] = $batterie->getPourcentage();
+        }
 
 
         $totalModule = $moduleRepository->filterConnex();
@@ -114,6 +171,16 @@ class ListModuleController extends AbstractController
         return  $this->render('list_module/single-module.html.twig', [
             'module' => $module,
             'modules' => $totalModule,
+           'modeConnex' => $modeConnex,
+           /*-------------------------------------------*/
+           'connexName' => json_encode($connexName),
+           'connexColor' => json_encode($connexColor),
+           'connexPercent' => json_encode($connexPercent),
+           'nameEtat' => json_encode($nameEtat),
+           'valueEtat' => json_encode($valueEtat),
+           'etatTempMax' => json_encode($etatTempMax),
+           'etatTempMin' => json_encode($etatTempMin),
+           'date' => json_encode($date),
            // 'moduleType' => $typeModules,
         ]);
     }
@@ -131,34 +198,51 @@ class ListModuleController extends AbstractController
      */
     public function list( Request $request, ModuleRepository $moduleRepository, TypeModuleRepository $typeModuleRepository, ConnectionRepository $connectionRepository, PowerSupplyRepository $powerSupplyRepository, SensorRepository $sensorRepository): Response
     {
-        $idUrl = $request->query->get('id');
-       // dump($idUrl);
-
 
         $moduleRepository = $this->getDoctrine()->getRepository(Module::class);
 
+
         $module = $moduleRepository->findAll();
         $type = $typeModuleRepository->findAll();
+
       //  dump($type);
 
         $connexion = $connectionRepository->findAll();
-
-
         //dump($connexion);
-
 
         $power = $powerSupplyRepository->findAll();
         $sensor = $sensorRepository->findAll();
 
 
+        $typeModules = null;
+        if(!empty($request->get('type'))){
 
-        $typeModules = $moduleRepository->findFiltersType($idUrl);
-       // dump($typeModules);
-        $sensorModules = $moduleRepository->findFiltersSensor($idUrl);
-        $connexModules = $moduleRepository->findFiltersConnex($idUrl);
-        $powerModules = $moduleRepository->findFiltersPower($idUrl);
+            $typeModules = $moduleRepository->findFiltersType($request->get('type'));
+            $module = null;
+        }
 
-//dump($sensorModules);
+        $sensorModules = null;
+        if(!empty($request->get('sensor'))){
+            $sensorModules = $moduleRepository->findFiltersSensor($request->get('sensor'));
+            $module = null;
+        }
+
+        $connexModules = null;
+        if(!empty($request->get('connection'))){
+            $connexModules = $moduleRepository->findFiltersConnex($request->get('connection'));
+            $module = null;
+        }
+
+        $powerModules = null;
+        if(!empty($request->get('power'))){
+            $powerModules = $moduleRepository->findFiltersPower($request->get('power'));
+            $module = null;
+        }
+
+        dump($request);
+
+
+
 
 
         return $this->render('list_module/index.html.twig', [
@@ -193,9 +277,9 @@ class ListModuleController extends AbstractController
             if($image){
                 $file = uniqid().'.'.$image->guessExtension();
                 $image->move($this->getParameter('upload_directory'), $file);
-                $module->setImage('image/'.$file);
+                $module->setImage($file);
             }else {
-                $module->setImage('default.jpg');
+                $module->setImage('fixtures/default.jpg');
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -221,7 +305,7 @@ class ListModuleController extends AbstractController
 
         $repoModules = $this->getDoctrine()->getRepository(Module::class);
         $moduleKo = $repoModules->moduleKo();
-dump($moduleKo);
+        //dump($moduleKo);
 
 
         return $this->render('list_module/module_ko.html.twig', [

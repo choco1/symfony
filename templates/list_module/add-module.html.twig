@@ -4,23 +4,26 @@
 
 {% block body %}
 
-    <div class="row ">
+
+    <div class="row mb-4">
         <div class="col-lg-7 mx-auto">
             <div class="card mt-2 mx-auto p-4 bg-light">
                 <div class="card-body bg-light">
 
-                    <div class="container">
+                    <div class="container ">
 
-                        <div class=" text-center my-3 ">
-                            <h1>Creation d'un Module</h1>
+                        <div class=" text-center mb-2 ">
+                            <h1 class="mb-4">Creation d'un Module</h1>
                         </div>
+                        <div class=" shadow-lg p-3 mb-5 bg-white rounded border border-primary mt-3">
+                            {{ form_start(addModule) }}
+                            {{ form_widget(addModule) }}
 
-                        {{ form_start(addModule) }}
-                        {{ form_widget(addModule) }}
-
-                        <button type="submit" class="btn btn-primary mr-4 mt-3 " formnovalidate>Ajoutez un nouveau Module</button>
-                        {{ form_end(addModule) }}
-
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class=" ajout btn btn-primary mr-4 mt-3 " formnovalidate>Ajoutez un nouveau Module</button>
+                            </div>
+                            {{ form_end(addModule) }}
+                        </div>
                     </div>
 
 

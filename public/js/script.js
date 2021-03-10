@@ -188,10 +188,25 @@ $(".noFunction a:first-child").click(function (){
 
     $('.cardModules').css('box-shadow', '10px 5px 5px #F11A1A');
 });
+
+
+
+/*------------les diagramme--------------*/
+
+$('.buttonGraph').click(function(){
+    var value = $(this).attr('data-filter');
+
+    if($('.'+value).find(".d-none").length){
+        $('.'+value).find(".d-none").addClass("d-block").removeClass("d-none")
+    }
+    else if($('.'+value).find(".d-block").length){
+        $('.'+value).find(".d-block").addClass("d-none").removeClass("d-block")
+    }
+});
 /*--------------------------------------------------------------------------*/
 /*---------------------------------list module-----------------------------------------*/
 
-$('.allModules').click(function(){
+$('.buttonAllModules').click(function(){
     var value = $(this).attr('data-filter');
 
     if($('.'+value).find(".d-block").length){
@@ -200,4 +215,17 @@ $('.allModules').click(function(){
     else if($('.'+value).find(".d-none").length){
         $('.'+value).find(".d-none").addClass("d-block").removeClass("d-none")
     }
+});
+
+/*----------------------------------------------------*/
+
+/*---------------input range --------------------*/
+
+$('#new_module_autonomie').after('<div id="result">'+$('#new_module_autonomie').val()+' H</div>');
+
+$('#new_module_autonomie').on('input', function () {
+    // alert('Toto');
+    $('#result').remove(); // On supprime la div pour éviter les doublons
+    // Je récupère la valeur du input et l'ajouter directement en dessous de celui-ci
+    $(this).after('<div id="result">'+$(this).val()+' H</div>');
 });

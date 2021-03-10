@@ -11,7 +11,7 @@ html{
 
 body{
     background-color: transparent;
-    background: url('https://www.efficientplantmag.com/wp-content/uploads/2018/12/1812fiiot_adobestock_139692114.jpg') fixed no-repeat;
+    background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p1/625762-abstrait-geometrique-gris-pour-fonds-d-39-ecran-de-sites-web-modeles-de-bussines-vectoriel.jpg");
     background-size: cover;
 
 }
@@ -25,7 +25,7 @@ body{
     width: 100%;
     height: 650px;
     top: 0;
-    background-image: url("https://www.onskyinc.com/wp-content/uploads/2019/09/iot-1.jpg");
+    background-image: url("https://mytechdecisions.com/wp-content/uploads/2019/01/jan-2.-industrial-iot-1000x436.jpg");
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;
@@ -33,33 +33,45 @@ body{
 
 
 .webreathe {
-    height: 85px !important;
+    height: 100px !important;
     width: 200px;
-
     display: inline-block;
 }
+
+
 
 .rCentered {
     font-size: 50px;
     position: absolute;
-    top: 20%;
-    right: 32px;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 0.7;
     border-radius: 10px;
 }
 
 
 h2 {
-    font-family: 'Anton';
+    font-weight: bolder;
 }
 
 h1 {
-    color: #2874f6;
+    font-size: 72px;
 }
 
-h2, .btn > i, .nav-link{
+.nav-link{
+    font-weight: bold ;
+    background: -webkit-linear-gradient(#1a66e9 40%, #62b0a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-    color: #2874f6;
+h2, h1, .btn > i.nav-link{
+
+    background: -webkit-linear-gradient(#62b0a3, #1a66e9 40%, #1a66e9 50%, #3e1a9f 41%,#62b0a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
 .navbar {
@@ -72,13 +84,6 @@ h2, .btn > i, .nav-link{
 }
 
 
-hr {
-    border: none;
-    border-top: 10px double #908157;
-    overflow: visible;
-    text-align: center;
-    height: 5px;
-}
 
 
 /*---------------------- Search Bar------*/
@@ -126,6 +131,47 @@ hr {
 .search-txt::placeholder {
     color: whitesmoke;
     font-size: 15px;
+}
+/*--------------------------image diagrammes------------------*/
+
+.position {
+    display: flex;
+    width: 1000px;
+
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: animate 20s linear infinite;
+}
+@keyframes animate {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+.box span {
+
+    top: 0;
+    right: 20%;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    -webkit-box-reflect: below 0 linear-gradient(transparent, transparent,#0004);
+}
+
+.box span img {
+    top: 0;
+    right: 20%;
+    object-fit: cover;
 }
 
 /*-----------------Cards home page-------------*/
@@ -391,8 +437,25 @@ ready.css:1
 
 .cards:hover .card-block {
     width: 300px;
-    background-image: -webkit-gradient(linear,right bottom, left top,from(#1a66e9),color-stop(50%, #813535),color-stop(31%, #3e1a9f),to(#62b0a3));
-    background-image: linear-gradient(to top left,#1a66e9 20%, #813535 50%, #3e1a9f 41%,#62b0a3 100%);
+    background-image: -webkit-gradient(linear,right bottom, left top,from(#1a66e9),color-stop(50%, #31a0c4),color-stop(31%, #3e1a9f),to(#62b0a3));
+    background-image: linear-gradient(to top left,#1a66e9 20%, #31a0c4 50%, #3e1a9f 41%,#62b0a3 100%);
+}
+
+.div-img {
+    width: 100%;
+}
+
+.bg {
+    height: 250px !important;
+
+}
+
+.bg-div {
+    background-color: #1a66e9;
+    opacity: 0.7;
+}
+.taille {
+    height: 500px;
 }
 
 .cards:hover .card-title{
@@ -436,7 +499,7 @@ ready.css:1
 
 footer {
     margin-top: 30px;
-    background: linear-gradient( #813535,#3e1a9f, #2472f6 );
+    background: linear-gradient(#62b0a3, #2472f6, #2472f6 );
 
 }
 
@@ -679,6 +742,16 @@ section ul li.active {
     background: whitesmoke;
 }
 
+.homeP {
+    width: 50%;
+    height: 50%;
+}
+
+.logo-partner {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .owl-dots {
     text-align: center;
     margin-top: 40px;
@@ -713,30 +786,32 @@ section ul li.active {
     height: 100% !important;
 }
 
-section ul li {
+.ajout, .go, section ul li {
     background: linear-gradient(to right,#2774f7, #143875);
-    width: 250px;
     border-radius: 40px;
     padding: 10px;
     color: whitesmoke;
     list-style: none;
 }
 
+section ul li {
+    width: 250px;
+}
+
 .module {
     width: 100%;
 }
 
-.caracteristique, .th-caract, th {
-    background: linear-gradient(to right,#2774f7, #143875);
+
+
+.th-caract {
+    background:  #2774f7;
     border: none;
     color: whitesmoke;
 }
 
 .table {
     width: 80%;
-}
-.th-caract {
-    width: 100%;
 }
 
 .contact {
@@ -750,8 +825,6 @@ section ul li {
 button {
     border: none;
 }
-
-
 
 /*------------------------------------------------------------------------------------*/
 
@@ -769,14 +842,6 @@ button {
     font-size: 10px;
 }
 
-
-
-
-
-
-
-
-
 /*----------------------------------------------------select----------------------------------------*/
 
 
@@ -787,58 +852,26 @@ button {
 .multi_select_box {
     width: 100%;
 }
-
-
-
-
 /*-----------------------------------------------------*/
 
+/*-------------------resultat input range----------------------*/
+#result {
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(to right, #2774f7, #143875) !important;
+    border-radius: 40px;
+    color: whitesmoke;
+    font-weight: bolder;
+    padding: 0;
+    width: 50px;
+    margin: 1%  45%;
 
 
-@media (max-width: 1120px){
-    .news-block{
-        max-width: 720px;
-    }
-    .cards:hover{
-        margin-right: -20px;
-    }
-    .cards:hover .card-block{
-        width: 300px;
-    }
 }
 
-@media (max-width: 800px){
-    .news-block{
-        min-width: 380px;
-    }
-    .cards:hover{
-        border-left: 20px solid transparent !important;
-        margin-right: -40px;
-        -webkit-transform:  translate(0, -50px);
-        transform:  translate(0, -50px);
-    }
-    .cards:hover:before{
-        -webkit-box-shadow: 0px 60px 40px RGBA(142, 142, 142, .5);
-        box-shadow: 0px 60px 40px RGBA(142, 142, 142, .5);
-    }
-    .cards:hover .card-block{
-        width: 300px;
-    }
+
 
     /*-------------single page Module----------------*/
-
-
-
-    /*-----------------------------------------------------*/
-
-
-}
-
-@media (max-width: 580px){
-    .news-block{
-        max-width: 380px;
-    }
-}
 
 #toggle-grid{
     position: fixed;
@@ -865,10 +898,5 @@ button {
     background: repeating-linear-gradient(to bottom right,rgb(0, 0, 0) 0%,rgb(226, 226, 226) 61.4%,rgb(226, 226, 226) 66.9%,rgb(226, 226, 226) 76.6%,rgb(226, 226, 226) 88.7%,rgb(255, 255, 255) 100%);
 }
 
-.orange{/*setting sur tt les modules*/
-    color: orange !important;
-    -webkit-box-shadow: 2px 2px 3px #888;
-    box-shadow: 2px 2px 3px #888;
-    opacity: 1 !important;
-}
+
 /*------------------*/

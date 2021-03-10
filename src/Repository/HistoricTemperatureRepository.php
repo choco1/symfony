@@ -2,29 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\HistoricFonctionModule;
+use App\Entity\HistoricTemperature;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method HistoricFonctionModule|null find($id, $lockMode = null, $lockVersion = null)
- * @method HistoricFonctionModule|null findOneBy(array $criteria, array $orderBy = null)
- * @method HistoricFonctionModule[]    findAll()
- * @method HistoricFonctionModule[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HistoricTemperature|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HistoricTemperature|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HistoricTemperature[]    findAll()
+ * @method HistoricTemperature[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class HistoricFonctionModuleRepository extends ServiceEntityRepository
+class HistoricTemperatureRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, HistoricFonctionModule::class);
+        parent::__construct($registry, HistoricTemperature::class);
     }
 
-
-
-
-
     // /**
-    //  * @return HistoricFonctionModule[] Returns an array of HistoricFonctionModule objects
+    //  * @return HistoricTemperature[] Returns an array of HistoricTemperature objects
     //  */
     /*
     public function findByExampleField($value)
@@ -41,7 +37,7 @@ class HistoricFonctionModuleRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?HistoricFonctionModule
+    public function findOneBySomeField($value): ?HistoricTemperature
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.exampleField = :val')

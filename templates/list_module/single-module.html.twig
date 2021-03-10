@@ -2,6 +2,10 @@
 
 {% block title %}Webreathe{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+{% endblock %}
+
 {% block body %}
 
 <body>
@@ -15,7 +19,7 @@
                         <div class="col-md-7 sm-12 mx-4 mt-5 ">
                             <div class="cardModules card card-block">
                                 <div class="photo mx-2">
-                                    <img class="img " src="{{ asset('uploads/' ~ module.image) }}" alt="Photo module">
+                                    <img class="img " src="{{ asset('image/uploads/' ~ module.image) }}" alt="Photo module">
                                 </div>
                             </div>
 
@@ -24,7 +28,7 @@
                         {# -------------Card right------------ #}
                         <div class="col-md-4 sm-12  mt-2">
                             <div class="product-content text-center my-5">
-                                <h2 class="module-title ">{{ module.name }}</h2>
+                                <h2 class="module-title">{{ module.name }}</h2>
                                 <div class="module-type">
                                     <h4> le type : {{ module.type.type }}</h4>
                                 </div>
@@ -55,37 +59,44 @@
                         <ul class="plus">
                             <li class="list buttonSavoir  text-center" data-filter="box-plus"><i class="fas fa-plus-circle mr-3"> En savoir </i></li>
                             <li class="list buttonConnex text-center" data-filter="box-connex"><i class="fas fa-wifi mr-2"></i>Connecter à</li>
+                            <li class="list buttonGraph text-center" data-filter="box-graph"><i class="fas fa-history mr-2""></i>l’historique </li>
                         </ul>
 
-                        <div class="module">
-                            <div class="box-plus">
-                                <div class="  d-none w-100">
+                        <div class="module ">
+                            <div class="box-plus col-md-12 ms-12">
+                                <div class="  d-none ">
 
                                     {# ---------------------------table---------------------- #}
                                     <div class="  mt-3">
-                                        <table class="table ">
+                                        <table class="table table-striped table-responsive">
                                             <thead class="caracteristique">
-                                                <tr class="w-100">
+                                                <tr class="th-caract">
                                                     <th scope="col">#</th>
-                                                    <th class=" th-caract text-center" scope="col">les caractéristiques du Module</th>
+                                                    <th class=" th-caract" scope="col">             </th>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">les caractéristiques</th>
+                                                    <th scope="col">du Module</th>
+                                                    <th scope="col"></th>
+                                                    <th scope="col"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <th scope="row"><i class="fas fa-sitemap w-100"></i></th>
+                                                <th class="th-caract" scope="row"><i class="fas fa-sitemap w-100"></i></th>
                                                 {% for module in module.sensor %}
                                                      <td>{{ module.nameSensor }}</td>
                                                 {% endfor %}
 
+
                                             </tr>
                                             <tr>
-                                                <th scope="row"><i class="fas fa-ethernet"></i></i> </th>
+                                                <th class="th-caract" scope="row"><i class="fas fa-ethernet"></i></i> </th>
                                                 {% for module in module.connection %}
                                                     <td>{{ module.typeConnex }}</td>
                                                 {% endfor %}
                                             </tr>
                                             <tr>
-                                                <th scope="row"><i class="far fa-car-battery"></i></th>
+                                                <th class="th-caract" scope="row"><i class="far fa-car-battery"></i></th>
                                                 <td>{{ module.typePower.typeOfPower }}</td>
                                                 <td>--</td>
                                                 <td>--</td>
@@ -107,7 +118,7 @@
                                                     <h4 class="prix card-title  text-right m-2">{{ module.price }}<i class="far fa-usd-circle"></i></h4>
                                                     <div class="mx-2">
                                                         <a href="{{ path('single_module', {'id': module.id}) }}">
-                                                            <img class="img " src="{{ asset('uploads/' ~ module.image) }}" alt="Photo of sunset">
+                                                            <img class="img " src="{{ asset('image/uploads/' ~ module.image) }}" alt="Photo of sunset">
                                                         </a>
                                                     </div>
                                                     <div class="p-2">
@@ -128,7 +139,7 @@
                                                                     {% endif %}
                                                                         <div class="mx-2">
                                                                             <a href="{{ path('single_module', {'id': singleModule.id}) }}">
-                                                                                <img class="img " src="{{ asset('uploads/' ~ singleModule.image) }}" alt="Photo of sunset">
+                                                                                <img class="img " src="{{ asset('image/uploads/' ~ singleModule.image) }}" alt="Photo of sunset">
                                                                             </a>
                                                                         </div>
                                                                         <div class="p-2">
@@ -159,11 +170,33 @@
                             </div>
 
                             {# -----------------------------------------------------interface historique du module ---------------------------------------------------- #}
+                           <div class="box-graph">
+                                <div class=" d-none ">
+                                    <div class="row">
+                                            <div class="col-md-6 my-5">
+                                            <h5 class="text-center text-primary my-4">Répartition en % de consomation de batterie du Module de chaque connexion pour chaque type de connexion</h5>
+                                            <canvas id="consoBatterie" width="400" height="400"></canvas>
+                                            </div>
+
+                                            <div class="col-md-6 my-5">
+                                                <h5 class="text-center text-primary my-4">Nombres des etats de fonctionnement ou disfonctionnement du Module </h5>
+                                                <canvas id="etat" width="400" height="400"></canvas>
+                                            </div>
 
 
+                                            <div class="col-md-12">
+                                                <h5 class="text-center text-primary my-4">Nombres de changements de temperature du Module </h5>
+                                            </div>
+                                            <div class="col-md-6 my-5">
+                                                <canvas id="temperatureMax" width="400" height="400"></canvas>
+                                            </div>
 
-
-
+                                            <div class="col-md-6 my-5">
+                                                <canvas id="temperatureMin" width="400" height="400"></canvas>
+                                            </div>
+                                    </div>
+                                </div>
+                           </div>
                         </div>
                     </section>
                 </div>
@@ -171,5 +204,70 @@
         </div>
     </div>
 </body>
+
+
+
+    {% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"
+            integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw=="
+            crossorigin="anonymous"></script>
+
+<script>
+    let batterie = document.querySelector("#consoBatterie")
+    let batterieGraph = new Chart(batterie, {
+        type: "pie",
+        data: {
+            labels: {{ connexName | raw }},
+            datasets: [{
+                label: "Répartition de consomation de batterie du Module de chaque type de connexion",
+                data:{{ connexPercent|raw }},
+                backgroundColor: {{ connexColor|raw }}
+            }]
+        }
+    })
+
+
+     let etat = document.querySelector("#etat")
+    let etatGraph = new Chart(etat, {
+        type: "bar",
+        data: {
+            labels: {{ nameEtat | raw }},
+            datasets: [{
+                label: "Nombre des etats de fonctionnement ou disfonctionnement du Module",
+                data:{{ valueEtat|raw }},
+                backgroundColor: {{ connexColor|raw }}
+            }]
+        }
+    })
+
+      let temperatureMax = document.querySelector("#temperatureMax")
+    let temperatureMaxGraph = new Chart(temperatureMax, {
+        type: "line",
+        data: {
+            labels: {{ etatTempMax | raw }},
+            datasets: [{
+                label: "temperature maxiamal du Module",
+                data: {{ etatTempMax | raw }},
+                backgroundColor: ["#0bb2e0"]
+            }]
+        }
+    })
+        let temperatureMin = document.querySelector("#temperatureMin")
+    let temperatureMinGraph = new Chart(temperatureMin, {
+        type: "line",
+        data: {
+            labels:  {{ etatTempMin | raw }},
+            datasets: [{
+                label: "temperature miniamal du Module",
+                data: {{ etatTempMin | raw }},
+                backgroundColor: ["red"]
+            }]
+        }
+    })
+
+
+</script>
+
+    {% endblock %}
 
 {% endblock %}

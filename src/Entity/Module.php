@@ -85,7 +85,7 @@ class Module
     private $maxTemperature;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $etatConnex;
 
@@ -99,6 +99,15 @@ class Module
      */
     private $historic;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=HistoricTemperature::class, inversedBy="modules")
+     */
+    private $historicTemperature;
+
+
+
+
+
 
 
     public function __construct()
@@ -108,6 +117,8 @@ class Module
         $this->consoBatterie = new ArrayCollection();
         $this->historicFonctionModules = new ArrayCollection();
         $this->historic = new ArrayCollection();
+        $this->historicTemperature = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -354,6 +365,34 @@ class Module
 
         return $this;
     }
+
+    /**
+     * @return Collection|HistoricTemperature[]
+     */
+    public function getHistoricTemperature(): Collection
+    {
+        return $this->historicTemperature;
+    }
+
+    public function addHistoricTemperature(HistoricTemperature $historicTemperature): self
+    {
+        if (!$this->historicTemperature->contains($historicTemperature)) {
+            $this->historicTemperature[] = $historicTemperature;
+        }
+
+        return $this;
+    }
+
+    public function removeHistoricTemperature(HistoricTemperature $historicTemperature): self
+    {
+        $this->historicTemperature->removeElement($historicTemperature);
+
+        return $this;
+    }
+
+
+
+
 
 
 

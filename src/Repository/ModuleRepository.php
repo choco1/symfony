@@ -20,14 +20,17 @@ class ModuleRepository extends ServiceEntityRepository
     }
 
 
-    public function findFiltersType($typeId){
+    public function findFiltersType($typeId ){
 
         $qb = $this->createQueryBuilder('m')
             ->innerJoin('m.type', 't')
-            ->andWhere('t = :typeId')
-            ->setParameter('typeId', $typeId );
+             ->andWhere('t = :typeId')
+               ->setParameter('typeId', $typeId );
 
-//dump($qb->getQuery()->getResult());
+
+
+
+dump($qb->getQuery()->getResult());
         return $qb->getQuery()->getResult();
 
     }
@@ -37,10 +40,14 @@ class ModuleRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('m')
             ->innerJoin('m.typePower', 'mt')
-            ->andWhere('mt = :powerId')
-            ->setParameter('powerId', $powerId );
 
-//dump($qb->getQuery()->getResult());
+
+               ->andWhere('mt = :powerId')
+                   ->setParameter('powerId', $powerId )
+                    ->groupBy('m.id');
+
+
+dump($qb->getQuery()->getResult());
         return $qb->getQuery()->getResult();
 
     }
@@ -53,9 +60,15 @@ class ModuleRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('m')
             ->innerJoin('m.sensor', 'ms')
-            ->andWhere('ms = :sensorId')
-            ->setParameter('sensorId', $sensorId )
-            ->groupBy('m.id');
+
+
+
+
+                ->andWhere('ms = :sensorId')
+                ->setParameter('sensorId', $sensorId )
+                ->groupBy('m.id');
+
+
 
         //dump($qb->getQuery()->getResult());
         return $qb->getQuery()->getResult();
@@ -68,9 +81,12 @@ class ModuleRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('m')
             ->innerJoin('m.connection', 'mc')
-            ->andWhere('mc = :connexId')
-            ->setParameter('connexId', $connexId )
-            ->groupBy('m.id');
+
+
+                 ->andWhere('mc = :connexId')
+                    ->setParameter('connexId', $connexId )
+                    ->groupBy('m.id');
+
 
        // dump($qb->getQuery()->getResult());
         return $qb->getQuery()->getResult();
@@ -103,7 +119,7 @@ class ModuleRepository extends ServiceEntityRepository
             ->setMaxResults(6);
 //                ->groupBy('m.id');
 
-        dump($qb->getQuery()->getResult());
+      //  dump($qb->getQuery()->getResult());
         return $qb->getQuery()->getResult();
     }
 

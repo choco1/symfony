@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\HistoricFonctionModuleRepository;
+use App\Repository\HistoricTemperatureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=HistoricFonctionModuleRepository::class)
+ * @ORM\Entity(repositoryClass=HistoricTemperatureRepository::class)
  */
-class HistoricFonctionModule
+class HistoricTemperature
 {
     /**
      * @ORM\Id
@@ -20,29 +20,24 @@ class HistoricFonctionModule
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $name;
+    private $tempMax;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $number;
+    private $tempMin;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $commentaire;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="historic")
-     * @
+     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="historicTemperature")
      */
     private $modules;
 
-
-
-
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date;
 
     public function __construct()
     {
@@ -54,38 +49,26 @@ class HistoricFonctionModule
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTempMax(): ?int
     {
-        return $this->name;
+        return $this->tempMax;
     }
 
-    public function setName(?string $name): self
+    public function setTempMax(?int $tempMax): self
     {
-        $this->name = $name;
+        $this->tempMax = $tempMax;
 
         return $this;
     }
 
-    public function getNumber(): ?int
+    public function getTempMin(): ?int
     {
-        return $this->number;
+        return $this->tempMin;
     }
 
-    public function setNumber(?int $number): self
+    public function setTempMin(?int $tempMin): self
     {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    public function getCommentaire(): ?string
-    {
-        return $this->commentaire;
-    }
-
-    public function setCommentaire(?string $commentaire): self
-    {
-        $this->commentaire = $commentaire;
+        $this->tempMin = $tempMin;
 
         return $this;
     }
@@ -102,7 +85,7 @@ class HistoricFonctionModule
     {
         if (!$this->modules->contains($module)) {
             $this->modules[] = $module;
-            $module->addHistoric($this);
+            $module->addHistoricTemperature($this);
         }
 
         return $this;
@@ -111,13 +94,21 @@ class HistoricFonctionModule
     public function removeModule(Module $module): self
     {
         if ($this->modules->removeElement($module)) {
-            $module->removeHistoric($this);
+            $module->removeHistoricTemperature($this);
         }
 
         return $this;
     }
 
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
 
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
-
+        return $this;
+    }
 }

@@ -6,10 +6,10 @@
 
     <body>
 
-        <div class="container">
+        <div class="container mb-5">
 
 
-            <div class="row  d-flex justify-content-around mt-4 ">
+            <div class="row  d-flex justify-content-around my-4 ">
                 <div class=" barre-modules bg-white col-md-12 mt-3 mx-5">
                     <h2 class="text-center text-warning my-4 col-md-12">Tous les modules defected !!! </h2>
                 </div>
@@ -31,7 +31,7 @@
 
                                     <img class="img alert " src="{{ asset('uploads/warning.png') }}" alt="">
 
-                                    <img class="img " src="{{ asset('uploads/' ~ moduleKo.image) }}" alt="Photo of sunset">
+                                    <img class="img " src="{{ asset('image/uploads/' ~ moduleKo.image) }}" alt="Photo of sunset">
                                 </a>
                             </div>
                             <div class="p-2">
@@ -44,9 +44,6 @@
                     </div>
                 {% endfor %}
             </div>
-
-
-
         </div>
     </body>
 
