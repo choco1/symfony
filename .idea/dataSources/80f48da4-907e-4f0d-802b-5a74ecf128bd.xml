@@ -1081,46 +1081,46 @@
     <table id="343" parent="15" name="conso_batterie">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="344" parent="15" name="gestion_compteur">
+    <table id="344" parent="15" name="historic_fonction_module">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="345" parent="15" name="historic_fonction_module">
+    <table id="345" parent="15" name="historic_temperature">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="346" parent="15" name="historic_temperature">
+    <table id="346" parent="15" name="home_page">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="347" parent="15" name="home_page">
+    <table id="347" parent="15" name="module">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="348" parent="15" name="module">
+    <table id="348" parent="15" name="module_connection">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="349" parent="15" name="module_connection">
+    <table id="349" parent="15" name="module_conso_batterie">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="350" parent="15" name="module_conso_batterie">
+    <table id="350" parent="15" name="module_historic_fonction_module">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="351" parent="15" name="module_historic_fonction_module">
+    <table id="351" parent="15" name="module_historic_temperature">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="352" parent="15" name="module_historic_temperature">
+    <table id="352" parent="15" name="module_sensor">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="353" parent="15" name="module_sensor">
+    <table id="353" parent="15" name="partner">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="354" parent="15" name="partner">
+    <table id="354" parent="15" name="power_supply">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="355" parent="15" name="power_supply">
+    <table id="355" parent="15" name="sensor">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="356" parent="15" name="sensor">
+    <table id="356" parent="15" name="type_module">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="357" parent="15" name="type_module">
+    <table id="357" parent="15" name="user">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
     <column id="358" parent="342" name="id">
@@ -1168,437 +1168,420 @@
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="367" parent="344" name="compteur_hist_module_id">
+    <column id="367" parent="344" name="name">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(255)|0s</DataType>
     </column>
-    <index id="368" parent="344" name="IDX_89CB0FFC3358C5B8">
-      <ColNames>compteur_hist_module_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="369" parent="344" name="PRIMARY">
+    <column id="368" parent="344" name="number">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="369" parent="344" name="commentaire">
+      <Position>4</Position>
+      <DataType>longtext|0s</DataType>
+    </column>
+    <key id="370" parent="344" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="370" parent="344" name="FK_89CB0FFC3358C5B8">
-      <ColNames>compteur_hist_module_id</ColNames>
-      <RefTableName>module</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
     <column id="371" parent="345" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="372" parent="345" name="name">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="373" parent="345" name="number">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-    </column>
-    <column id="374" parent="345" name="commentaire">
-      <Position>4</Position>
-      <DataType>longtext|0s</DataType>
-    </column>
-    <column id="375" parent="345" name="gestion_compteur_id">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-    </column>
-    <index id="376" parent="345" name="IDX_A7311CD851B148FA">
-      <ColNames>gestion_compteur_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="377" parent="345" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="378" parent="345" name="FK_A7311CD851B148FA">
-      <ColNames>gestion_compteur_id</ColNames>
-      <RefTableName>gestion_compteur</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="379" parent="346" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="380" parent="346" name="temp_max">
+    <column id="372" parent="345" name="temp_max">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="381" parent="346" name="temp_min">
+    <column id="373" parent="345" name="temp_min">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="382" parent="346" name="date">
+    <column id="374" parent="345" name="date">
       <Position>4</Position>
       <DataType>date|0s</DataType>
     </column>
-    <key id="383" parent="346" name="PRIMARY">
+    <key id="375" parent="345" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="384" parent="347" name="id">
+    <column id="376" parent="346" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="385" parent="347" name="title">
+    <column id="377" parent="346" name="title">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="386" parent="347" name="image">
+    <column id="378" parent="346" name="image">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="387" parent="347" name="description">
+    <column id="379" parent="346" name="description">
       <Position>4</Position>
       <DataType>longtext|0s</DataType>
     </column>
-    <key id="388" parent="347" name="PRIMARY">
+    <key id="380" parent="346" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="389" parent="348" name="id">
+    <column id="381" parent="347" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="390" parent="348" name="type_id">
+    <column id="382" parent="347" name="type_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="391" parent="348" name="type_power_id">
+    <column id="383" parent="347" name="type_power_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="392" parent="348" name="name">
+    <column id="384" parent="347" name="name">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="393" parent="348" name="price">
+    <column id="385" parent="347" name="price">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="394" parent="348" name="description">
+    <column id="386" parent="347" name="description">
       <Position>6</Position>
       <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="395" parent="348" name="number_serie">
+    <column id="387" parent="347" name="number_serie">
       <Position>7</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="396" parent="348" name="function_state">
+    <column id="388" parent="347" name="function_state">
       <Position>8</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="397" parent="348" name="image">
+    <column id="389" parent="347" name="image">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="398" parent="348" name="autonomie">
+    <column id="390" parent="347" name="autonomie">
       <Position>10</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="399" parent="348" name="temperature_module">
+    <column id="391" parent="347" name="temperature_module">
       <Position>11</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="400" parent="348" name="max_temperature">
+    <column id="392" parent="347" name="max_temperature">
       <Position>12</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="401" parent="348" name="etat_connex">
+    <column id="393" parent="347" name="etat_connex">
       <Position>13</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <index id="402" parent="348" name="IDX_C242628C54C8C93">
+    <index id="394" parent="347" name="IDX_C242628C54C8C93">
       <ColNames>type_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="403" parent="348" name="IDX_C24262866B0E478">
+    <index id="395" parent="347" name="IDX_C24262866B0E478">
       <ColNames>type_power_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="404" parent="348" name="PRIMARY">
+    <key id="396" parent="347" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="405" parent="348" name="FK_C242628C54C8C93">
+    <foreign-key id="397" parent="347" name="FK_C242628C54C8C93">
       <ColNames>type_id</ColNames>
       <RefTableName>type_module</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="406" parent="348" name="FK_C24262866B0E478">
+    <foreign-key id="398" parent="347" name="FK_C24262866B0E478">
       <ColNames>type_power_id</ColNames>
       <RefTableName>power_supply</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="407" parent="349" name="module_id">
+    <column id="399" parent="348" name="module_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="408" parent="349" name="connection_id">
+    <column id="400" parent="348" name="connection_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="409" parent="349" name="IDX_BC1258FBAFC2B591">
+    <index id="401" parent="348" name="IDX_BC1258FBAFC2B591">
       <ColNames>module_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="410" parent="349" name="IDX_BC1258FBDD03F01">
+    <index id="402" parent="348" name="IDX_BC1258FBDD03F01">
       <ColNames>connection_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="411" parent="349" name="PRIMARY">
+    <key id="403" parent="348" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>module_id
 connection_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="412" parent="349" name="FK_BC1258FBAFC2B591">
+    <foreign-key id="404" parent="348" name="FK_BC1258FBAFC2B591">
       <ColNames>module_id</ColNames>
       <RefTableName>module</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="413" parent="349" name="FK_BC1258FBDD03F01">
+    <foreign-key id="405" parent="348" name="FK_BC1258FBDD03F01">
       <ColNames>connection_id</ColNames>
       <RefTableName>connection</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="414" parent="350" name="module_id">
+    <column id="406" parent="349" name="module_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="415" parent="350" name="conso_batterie_id">
+    <column id="407" parent="349" name="conso_batterie_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="416" parent="350" name="IDX_AFA6183AFC2B591">
+    <index id="408" parent="349" name="IDX_AFA6183AFC2B591">
       <ColNames>module_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="417" parent="350" name="IDX_AFA61832D629A37">
+    <index id="409" parent="349" name="IDX_AFA61832D629A37">
       <ColNames>conso_batterie_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="418" parent="350" name="PRIMARY">
+    <key id="410" parent="349" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>module_id
 conso_batterie_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="419" parent="350" name="FK_AFA6183AFC2B591">
+    <foreign-key id="411" parent="349" name="FK_AFA6183AFC2B591">
       <ColNames>module_id</ColNames>
       <RefTableName>module</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="420" parent="350" name="FK_AFA61832D629A37">
+    <foreign-key id="412" parent="349" name="FK_AFA61832D629A37">
       <ColNames>conso_batterie_id</ColNames>
       <RefTableName>conso_batterie</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="421" parent="351" name="module_id">
+    <column id="413" parent="350" name="module_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="422" parent="351" name="historic_fonction_module_id">
+    <column id="414" parent="350" name="historic_fonction_module_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="423" parent="351" name="IDX_D9CB62B5AFC2B591">
+    <index id="415" parent="350" name="IDX_D9CB62B5AFC2B591">
       <ColNames>module_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="424" parent="351" name="IDX_D9CB62B55272FC78">
+    <index id="416" parent="350" name="IDX_D9CB62B55272FC78">
       <ColNames>historic_fonction_module_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="425" parent="351" name="PRIMARY">
+    <key id="417" parent="350" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>module_id
 historic_fonction_module_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="426" parent="351" name="FK_D9CB62B5AFC2B591">
+    <foreign-key id="418" parent="350" name="FK_D9CB62B5AFC2B591">
       <ColNames>module_id</ColNames>
       <RefTableName>module</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="427" parent="351" name="FK_D9CB62B55272FC78">
+    <foreign-key id="419" parent="350" name="FK_D9CB62B55272FC78">
       <ColNames>historic_fonction_module_id</ColNames>
       <RefTableName>historic_fonction_module</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="428" parent="352" name="module_id">
+    <column id="420" parent="351" name="module_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="429" parent="352" name="historic_temperature_id">
+    <column id="421" parent="351" name="historic_temperature_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="430" parent="352" name="IDX_6D436E68AFC2B591">
+    <index id="422" parent="351" name="IDX_6D436E68AFC2B591">
       <ColNames>module_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="431" parent="352" name="IDX_6D436E687F2CD9CB">
+    <index id="423" parent="351" name="IDX_6D436E687F2CD9CB">
       <ColNames>historic_temperature_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="432" parent="352" name="PRIMARY">
+    <key id="424" parent="351" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>module_id
 historic_temperature_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="433" parent="352" name="FK_6D436E68AFC2B591">
+    <foreign-key id="425" parent="351" name="FK_6D436E68AFC2B591">
       <ColNames>module_id</ColNames>
       <RefTableName>module</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="434" parent="352" name="FK_6D436E687F2CD9CB">
+    <foreign-key id="426" parent="351" name="FK_6D436E687F2CD9CB">
       <ColNames>historic_temperature_id</ColNames>
       <RefTableName>historic_temperature</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="435" parent="353" name="module_id">
+    <column id="427" parent="352" name="module_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="436" parent="353" name="sensor_id">
+    <column id="428" parent="352" name="sensor_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="437" parent="353" name="IDX_1685579FAFC2B591">
+    <index id="429" parent="352" name="IDX_1685579FAFC2B591">
       <ColNames>module_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="438" parent="353" name="IDX_1685579FA247991F">
+    <index id="430" parent="352" name="IDX_1685579FA247991F">
       <ColNames>sensor_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="439" parent="353" name="PRIMARY">
+    <key id="431" parent="352" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>module_id
 sensor_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="440" parent="353" name="FK_1685579FAFC2B591">
+    <foreign-key id="432" parent="352" name="FK_1685579FAFC2B591">
       <ColNames>module_id</ColNames>
       <RefTableName>module</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="441" parent="353" name="FK_1685579FA247991F">
+    <foreign-key id="433" parent="352" name="FK_1685579FA247991F">
       <ColNames>sensor_id</ColNames>
       <RefTableName>sensor</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="442" parent="354" name="id">
+    <column id="434" parent="353" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="443" parent="354" name="entreprise">
+    <column id="435" parent="353" name="entreprise">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="444" parent="354" name="logo">
+    <column id="436" parent="353" name="logo">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="445" parent="354" name="PRIMARY">
+    <key id="437" parent="353" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="446" parent="355" name="id">
+    <column id="438" parent="354" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="447" parent="355" name="type_of_power">
+    <column id="439" parent="354" name="type_of_power">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="448" parent="355" name="PRIMARY">
+    <key id="440" parent="354" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="449" parent="356" name="id">
+    <column id="441" parent="355" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="450" parent="356" name="name_sensor">
+    <column id="442" parent="355" name="name_sensor">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="451" parent="356" name="PRIMARY">
+    <key id="443" parent="355" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="452" parent="357" name="id">
+    <column id="444" parent="356" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="453" parent="357" name="type">
+    <column id="445" parent="356" name="type">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="454" parent="357" name="PRIMARY">
+    <key id="446" parent="356" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="447" parent="357" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="448" parent="357" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="449" parent="357" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="450" parent="357" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

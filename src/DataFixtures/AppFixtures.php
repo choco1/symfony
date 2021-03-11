@@ -145,7 +145,7 @@ class AppFixtures extends Fixture
             $module = new Module();
             $module->setName($faker->name);
             $module->setPrice($faker->numberBetween(300, 2000));
-            $module->setDescription($faker->text(70));
+            $module->setDescription($faker->text(40));
             //$module->addGestionCompteur()
             $module->setFunctionState($faker->boolean(70));
             $module->setEtatConnex($faker->boolean(0));

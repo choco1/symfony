@@ -242,3 +242,6 @@ $('#new_module_autonomie').on('input', function () {
     // Je récupère la valeur du input et l'ajouter directement en dessous de celui-ci
     $(this).after('<div id="result">'+$(this).val()+' H</div>');
 });
+
+
+/*-------------------------------------affiche l'image dans le formulaire -------------------------*/

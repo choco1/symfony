@@ -16,6 +16,7 @@ use App\Repository\PowerSupplyRepository;
 use App\Repository\SensorRepository;
 use App\Repository\TypeModuleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
