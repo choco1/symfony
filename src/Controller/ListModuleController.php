@@ -35,6 +35,8 @@ class ListModuleController extends AbstractController
         $moduleRepository = $em->getRepository(Module::class)->find($id);
        $recupId = $moduleRepository->getId();
 
+
+
         if($moduleRepository->getFunctionState() == 0){
             $moduleRepository->setFunctionState("1");
 
@@ -78,6 +80,7 @@ class ListModuleController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $moduleRepository = $em->getRepository(Module::class)->find($id);
+        dump($moduleRepository->getHistoric());
 
         if ($moduleRepository->getEtatConnex() == 0) {
 
@@ -124,6 +127,8 @@ class ListModuleController extends AbstractController
 
         $temperatures = $module->getHistoricTemperature();
 
+
+
         foreach ($temperatures as $temperature){
 
 
@@ -145,6 +150,9 @@ class ListModuleController extends AbstractController
        $values = $module->getHistoric();
 
        foreach ($values as $value){
+
+           dump($value->getName());
+           dump($value->getNumber());
 
            $nameEtat[] = $value->getName();
            $valueEtat[] = $value->getNumber();

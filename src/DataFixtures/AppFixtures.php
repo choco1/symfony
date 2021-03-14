@@ -13,18 +13,40 @@ use App\Entity\Partner;
 use App\Entity\PowerSupply;
 use App\Entity\Sensor;
 use App\Entity\TypeModule;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+
+
+    private $passwordEncoder;
+
+    public function __construct( UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
+
+
     public function load(ObjectManager $manager)
     {
         // $product = new Product();
         // $manager->persist($product);
 
         $faker = Faker\Factory::create("fr_FR");
+
+
+        $user = new User();
+        $user->setEmail('najwa.ciesielczyk@gmail.com');
+        $user->setPassword($this->passwordEncoder->encodePassword($user,'12345678'));
+        $user->setRoles(['ROLE_ADMIN']);
+        $manager->persist($user);
+
+
 
 
         for ($i = 0; $i < 20; $i++ ){
